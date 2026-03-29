@@ -1,0 +1,25 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-T0xw8pL-.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-BVB1A5mF.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/cart.js": {
+    "file": "assets/cart-B7BYB8fk.js",
+    "name": "cart",
+    "src": "resources/js/cart.js",
+    "isEntry": true
+  },
+  "resources/js/catalogue.js": {
+    "file": "assets/catalogue-TMg1SpXu.js",
+    "name": "catalogue",
+    "src": "resources/js/catalogue.js",
+    "isEntry": true
+  }
+}

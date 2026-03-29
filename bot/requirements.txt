@@ -1,0 +1,9 @@
+# BOTCH - Paolo-Wash Telegram Bot
+# Python 3.9+ recommandé
+
+aiogram>=3.0.0,<4.0.0
+python-dotenv>=1.0.0
+
+# Dépendances optionnelles pour futures features
+# aiohttp>=3.9.0  # Pour requêtes API futures (SimplyBook.me)
+# APScheduler>=3.10.0  # Pour notifications programmées

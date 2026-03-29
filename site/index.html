@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paolo Wash — Lavage Auto à Domicile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>body{font-family:'Inter',sans-serif}</style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <!-- Hero -->
+    <section class="bg-gradient-to-br from-blue-600 to-blue-800 text-white py-20 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">Paolo Wash</h1>
+            <p class="text-xl md:text-2xl mb-6">Votre voiture étincelante, sans bouger de chez vous</p>
+            <p class="text-lg opacity-90 mb-8">Lavage auto à domicile — Rozier et alentours</p>
+            <a href="#reserver" class="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition">Réserver maintenant</a>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="py-16 px-4 max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-12">Nos Services</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                <div class="text-5xl mb-4">🚗</div>
+                <h3 class="text-xl font-semibold mb-2">Lavage Extérieur</h3>
+                <p class="text-gray-600">Carrosserie, jantes, vitres — votre auto brille</p>
+                <p class="text-blue-600 font-bold mt-4">À partir de 35€</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                <div class="text-5xl mb-4">✨</div>
+                <h3 class="text-xl font-semibold mb-2">Lavage Complet</h3>
+                <p class="text-gray-600">Intérieur + extérieur, aspiration, tableau de bord</p>
+                <p class="text-blue-600 font-bold mt-4">À partir de 65€</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                <div class="text-5xl mb-4">🌟</div>
+                <h3 class="text-xl font-semibold mb-2">Premium</h3>
+                <p class="text-gray-600">Cuir, shampoing sièges, odeurs, finition pro</p>
+                <p class="text-blue-600 font-bold mt-4">Sur devis</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pourquoi -->
+    <section class="bg-blue-50 py-16 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">Pourquoi Paolo Wash ?</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="flex items-start gap-4">
+                    <div class="text-3xl">🏠</div>
+                    <div>
+                        <h3 class="font-semibold text-lg">À domicile</h3>
+                        <p class="text-gray-600">On vient chez vous, pas besoin de déplacer votre véhicule</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4">
+                    <div class="text-3xl">⏱️</div>
+                    <div>
+                        <h3 class="font-semibold text-lg">Rapide</h3>
+                        <p class="text-gray-600">30 min à 1h30 selon le service choisi</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4">
+                    <div class="text-3xl">🌿</div>
+                    <div>
+                        <h3 class="font-semibold text-lg">Écologique</h3>
+                        <p class="text-gray-600">Produits respectueux de l'environnement</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4">
+                    <div class="text-3xl">😊</div>
+                    <div>
+                        <h3 class="font-semibold text-lg">Satisfaction garantie</h3>
+                        <p class="text-gray-600">Pas content ? On recommence, c'est offert</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Réservation -->
+    <section id="reserver" class="py-16 px-4 max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-4 text-center">Réservez votre créneau</h2>
+        <p class="text-gray-600 mb-8 text-center">Choisissez votre date et heure, on s'occupe du reste</p>
+        
+        <!-- Calendrier local -->
+        <div class="bg-white rounded-xl shadow-lg p-8">
+            <div id="calendar-app">
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold mb-4">Services disponibles</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6" id="services-list">
+                        <button onclick="selectService('lavage-exterieur')" class="service-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 transition text-left" data-service="lavage-exterieur">
+                            <div class="font-semibold">Lavage Extérieur</div>
+                            <div class="text-blue-600 font-bold">35€</div>
+                        </button>
+                        <button onclick="selectService('lavage-interieur')" class="service-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 transition text-left" data-service="lavage-interieur">
+                            <div class="font-semibold">Lavage Intérieur</div>
+                            <div class="text-blue-600 font-bold">45€</div>
+                        </button>
+                        <button onclick="selectService('lavage-complet')" class="service-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 transition text-left" data-service="lavage-complet">
+                            <div class="font-semibold">Lavage Complet</div>
+                            <div class="text-blue-600 font-bold">75€</div>
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="calendar-view" class="hidden">
+                    <h3 class="text-xl font-semibold mb-4">Créneaux disponibles</h3>
+                    <div id="slots-container" class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        <!-- Slots générés par JS -->
+                    </div>
+                </div>
+                
+                <div id="reservation-form" class="hidden mt-6 p-6 bg-gray-50 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4">Finaliser votre réservation</h3>
+                    <form id="booking-form" onsubmit="submitReservation(event)">
+                        <div class="grid md:grid-cols-2 gap-4 mb-4">
+                            <input type="text" id="client-name" placeholder="Votre prénom" required class="p-3 border rounded-lg">
+                            <input type="tel" id="client-phone" placeholder="Votre téléphone" required class="p-3 border rounded-lg">
+                        </div>
+                        <input type="hidden" id="selected-slot-id">
+                        <input type="hidden" id="selected-service">
+                        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+                            Confirmer la réservation
+                        </button>
+                    </form>
+                </div>
+                
+                <div id="reservation-success" class="hidden mt-6 p-6 bg-green-50 rounded-lg text-center">
+                    <div class="text-5xl mb-4">✅</div>
+                    <h3 class="text-xl font-semibold text-green-800 mb-2">Réservation confirmée !</h3>
+                    <p class="text-green-700">Paolo vous contactera pour confirmer.</p>
+                </div>
+            </div>
+        </div>
+        
+        <p class="mt-6 text-sm text-gray-500 text-center">Ou contactez-nous directement sur Telegram</p>
+        <div class="text-center">
+            <a href="https://t.me/paolo_wash_bot" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-full mt-2 hover:bg-blue-700 transition">@paolo_wash_bot</a>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="bg-gray-900 text-white py-16 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-8">Contact</h2>
+            <div class="flex flex-wrap justify-center gap-8">
+                <a href="tel:+33000000000" class="flex items-center gap-2 hover:text-blue-400">
+                    <span>📞</span> 06 XX XX XX XX
+                </a>
+                <a href="https://t.me/paolo_wash_bot" class="flex items-center gap-2 hover:text-blue-400">
+                    <span>💬</span> @paolo_wash_bot
+                </a>
+            </div>
+            <p class="mt-8 text-gray-400">Rozier (48) et alentours • Déplacement inclus</p>
+        </div>
+    </section>
+
+    <!-- SimplyBook.me Widget Script (à configurer) -->
+    <!-- <script src="https://widget.simplybook.it/v2/widget/widget.js"></script> -->
+    
+    <script>
+    const API_URL = 'http://paolowash.pythonanywhere.com';
+    let selectedService = null;
+    
+    function selectService(service) {
+        selectedService = service;
+        document.getElementById('selected-service').value = service;
+        
+        // Update UI
+        document.querySelectorAll('.service-btn').forEach(btn => {
+            btn.classList.remove('border-blue-500', 'bg-blue-50');
+            btn.classList.add('border-gray-200');
+        });
+        event.target.closest('.service-btn').classList.remove('border-gray-200');
+        event.target.closest('.service-btn').classList.add('border-blue-500', 'bg-blue-50');
+        
+        // Load slots
+        loadSlots();
+    }
+    
+    async function loadSlots() {
+        try {
+            const response = await fetch(`${API_URL}/api/slots?days=7`);
+            const data = await response.json();
+            
+            const container = document.getElementById('slots-container');
+            container.innerHTML = '';
+            
+            if (data.slots.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 col-span-full">Aucun créneau disponible</p>';
+            } else {
+                data.slots.forEach(slot => {
+                    const btn = document.createElement('button');
+                    btn.className = 'p-3 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition text-sm';
+                    btn.innerHTML = `<div class="font-semibold">${slot.date}</div><div class="text-blue-600">${slot.time}</div>`;
+                    btn.onclick = () => selectSlot(slot.id, slot.date, slot.time);
+                    container.appendChild(btn);
+                });
+            }
+            
+            document.getElementById('calendar-view').classList.remove('hidden');
+        } catch (error) {
+            console.error('Error loading slots:', error);
+            alert('Erreur de chargement des créneaux. Le serveur backend est-il démarré ?');
+        }
+    }
+    
+    function selectSlot(slotId, date, time) {
+        document.getElementById('selected-slot-id').value = slotId;
+        document.getElementById('reservation-form').classList.remove('hidden');
+        document.getElementById('reservation-form').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    async function submitReservation(event) {
+        event.preventDefault();
+        
+        const data = {
+            slot_id: parseInt(document.getElementById('selected-slot-id').value),
+            client_name: document.getElementById('client-name').value,
+            client_phone: document.getElementById('client-phone').value,
+            service: document.getElementById('selected-service').value
+        };
+        
+        try {
+            const response = await fetch(`${API_URL}/api/reserve`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            
+            if (response.ok) {
+                document.getElementById('booking-form').classList.add('hidden');
+                document.getElementById('reservation-success').classList.remove('hidden');
+            } else {
+                const error = await response.json();
+                alert('Erreur: ' + error.error);
+            }
+        } catch (error) {
+            console.error('Error submitting reservation:', error);
+            alert('Erreur lors de la réservation. Veuillez réessayer.');
+        }
+    }
+    </script>
+</body>
+</html>

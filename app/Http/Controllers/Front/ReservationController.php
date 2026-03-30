@@ -125,7 +125,19 @@ class ReservationController extends Controller
         // Marquer le créneau comme réservé
         $presence->marquerReservee();
 
-        return redirect()->route('reserver')
-            ->with('success', 'Votre réservation a été confirmée ! Un email de confirmation vous a été envoyé.');
+        return redirect()->route('reserver.confirmation', $reservation)
+            ->with('success', 'Votre réservation a été confirmée !');
+    }
+
+    /**
+     * Show the confirmation page for a reservation.
+     */
+    public function confirmation(Reservation $reservation)
+    {
+        $reservation->load('presence.lieu');
+
+        return view('reservations.confirmation', [
+            'reservation' => $reservation,
+        ]);
     }
 }

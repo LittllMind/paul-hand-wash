@@ -80,4 +80,23 @@ class ReservationControllerTest extends TestCase
             'Le modèle Reservation doit exister'
         );
     }
+
+    // ========== T3.4: Confirmation Réservation ==========
+    public function test_reservation_controller_a_methode_confirmation()
+    {
+        $controller = new \App\Http\Controllers\Front\ReservationController();
+        $this->assertTrue(
+            method_exists($controller, 'confirmation'),
+            'ReservationController doit avoir une méthode confirmation'
+        );
+    }
+
+    public function test_vue_confirmation_existe()
+    {
+        $viewPath = resource_path('views/reservations/confirmation.blade.php');
+        $this->assertTrue(
+            file_exists($viewPath),
+            'La vue reservations/confirmation.blade.php doit exister'
+        );
+    }
 }

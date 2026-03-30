@@ -13,6 +13,7 @@ Route::get('/', function () {
 Route::get('/reserver', [ReservationController::class, 'index'])->name('reserver');
 Route::get('/reserver/{presence}', [ReservationController::class, 'show'])->name('reserver.show');
 Route::post('/reserver/{presence}', [ReservationController::class, 'store'])->name('reserver.store');
+Route::get('/reservation/{reservation}/confirmation', [ReservationController::class, 'confirmation'])->name('reserver.confirmation');
 
 // ========== Admin: Lieux ==========
 Route::get('/admin/lieux', [LieuController::class, 'index'])->name('admin.lieux.index');

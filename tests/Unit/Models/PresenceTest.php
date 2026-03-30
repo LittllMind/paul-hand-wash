@@ -62,4 +62,14 @@ class PresenceTest extends TestCase
             $uses
         );
     }
+
+    // ========== T2.4: Marquer Créneau Réservé ==========
+    public function test_presence_a_methode_marquer_reservee()
+    {
+        $presence = new Presence();
+        $this->assertTrue(
+            method_exists($presence, 'marquerReservee'),
+            'Presence doit avoir une méthode marquerReservee()'
+        );
+    }
 }

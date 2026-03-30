@@ -28,4 +28,28 @@ class Presence extends Model
     {
         return $this->belongsTo(Lieu::class);
     }
+
+    /**
+     * Marquer la présence comme réservée.
+     */
+    public function marquerReservee(): void
+    {
+        $this->update(['est_reserve' => true]);
+    }
+
+    /**
+     * Marquer la présence comme disponible.
+     */
+    public function marquerDisponible(): void
+    {
+        $this->update(['est_reserve' => false]);
+    }
+
+    /**
+     * Vérifier si la présence est réservée.
+     */
+    public function estReservee(): bool
+    {
+        return $this->est_reserve;
+    }
 }

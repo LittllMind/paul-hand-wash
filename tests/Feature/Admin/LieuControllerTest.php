@@ -71,4 +71,32 @@ class LieuControllerTest extends TestCase
             'La vue admin/lieux/create.blade.php doit exister'
         );
     }
+
+    // ========== T1.4: Edit/Update ==========
+    public function test_lieu_controller_a_methode_edit()
+    {
+        $controller = new \App\Http\Controllers\Admin\LieuController();
+        $this->assertTrue(
+            method_exists($controller, 'edit'),
+            'LieuController doit avoir une méthode edit'
+        );
+    }
+
+    public function test_lieu_controller_a_methode_update()
+    {
+        $controller = new \App\Http\Controllers\Admin\LieuController();
+        $this->assertTrue(
+            method_exists($controller, 'update'),
+            'LieuController doit avoir une méthode update'
+        );
+    }
+
+    public function test_vue_admin_lieux_edit_existe()
+    {
+        $viewPath = resource_path('views/admin/lieux/edit.blade.php');
+        $this->assertTrue(
+            file_exists($viewPath),
+            'La vue admin/lieux/edit.blade.php doit exister'
+        );
+    }
 }

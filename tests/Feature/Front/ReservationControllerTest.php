@@ -62,4 +62,22 @@ class ReservationControllerTest extends TestCase
             'La vue reservations/formulaire.blade.php doit exister'
         );
     }
+
+    // ========== T3.3: Store Réservation ==========
+    public function test_reservation_controller_a_methode_store()
+    {
+        $controller = new \App\Http\Controllers\Front\ReservationController();
+        $this->assertTrue(
+            method_exists($controller, 'store'),
+            'ReservationController doit avoir une méthode store'
+        );
+    }
+
+    public function test_modele_reservation_existe()
+    {
+        $this->assertTrue(
+            class_exists(\App\Models\Reservation::class),
+            'Le modèle Reservation doit exister'
+        );
+    }
 }

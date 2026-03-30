@@ -35,7 +35,7 @@
         </p>
     </div>
 
-    <form action="#" method="POST">
+    <form action="{{ route('reserver.store', $creneau) }}" method="POST">
         @csrf
         
         <div class="form-group">

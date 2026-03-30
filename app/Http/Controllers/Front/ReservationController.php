@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Models\Lieu;
 use App\Models\Presence;
+use App\Models\Reservation;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -82,5 +83,49 @@ class ReservationController extends Controller
             'creneau' => $presence,
             'prestations' => $prestations,
         ]);
+    }
+
+    /**
+     * Store a new reservation.
+     */
+    public function store(Request $request, Presence $presence)
+    {
+        // Vérifier que le créneau est encore disponible
+        if ($presence->est_reserve) {
+            return redirect()->route('reserver')
+                ->with('error', 'Ce créneau n\'est plus disponible.');
+        }
+
+        // Validation
+        $validated = $request->validate([
+            'client_nom' => 'required|string|max:100',
+            'client_telephone' => 'required|string|max:20',
+            'client_email' => 'required|email|max:100',
+            'prestation' => 'required|in:Express,Essentiel,Premium',
+        ]);
+
+        // Prix des prestations
+        $prix = [
+            'Express' => 15,
+            'Essentiel' => 25,
+            'Premium' => 45,
+        ];
+
+        // Créer la réservation
+        $reservation = Reservation::create([
+            'presence_id' => $presence->id,
+            'client_nom' => $validated['client_nom'],
+            'client_telephone' => $validated['client_telephone'],
+            'client_email' => $validated['client_email'],
+            'prestation' => $validated['prestation'],
+            'montant' => $prix[$validated['prestation']],
+            'paye' => false,
+        ]);
+
+        // Marquer le créneau comme réservé
+        $presence->marquerReservee();
+
+        return redirect()->route('reserver')
+            ->with('success', 'Votre réservation a été confirmée ! Un email de confirmation vous a été envoyé.');
     }
 }

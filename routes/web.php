@@ -8,3 +8,5 @@ Route::get('/', function () {
 });
 
 Route::get('/admin/lieux', [LieuController::class, 'index'])->name('admin.lieux.index');
+Route::get('/admin/lieux/create', [LieuController::class, 'create'])->name('admin.lieux.create');
+Route::post('/admin/lieux', [LieuController::class, 'store'])->name('admin.lieux.store');

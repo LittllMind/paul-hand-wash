@@ -7,10 +7,9 @@ use Tests\TestCase;
 
 class LieuControllerTest extends TestCase
 {
+    // ========== T1.2: Index ==========
     public function test_admin_peut_voir_liste_lieux()
     {
-        // Test structurel : vérifier que le controller existe et retourne une vue
-        
         $this->assertTrue(
             class_exists(\App\Http\Controllers\Admin\LieuController::class),
             'LieuController doit exister'
@@ -42,6 +41,34 @@ class LieuControllerTest extends TestCase
         $this->assertTrue(
             file_exists($viewPath),
             'La vue admin/lieux/index.blade.php doit exister'
+        );
+    }
+
+    // ========== T1.3: Create/Store ==========
+    public function test_lieu_controller_a_methode_create()
+    {
+        $controller = new \App\Http\Controllers\Admin\LieuController();
+        $this->assertTrue(
+            method_exists($controller, 'create'),
+            'LieuController doit avoir une méthode create'
+        );
+    }
+
+    public function test_lieu_controller_a_methode_store()
+    {
+        $controller = new \App\Http\Controllers\Admin\LieuController();
+        $this->assertTrue(
+            method_exists($controller, 'store'),
+            'LieuController doit avoir une méthode store'
+        );
+    }
+
+    public function test_vue_admin_lieux_create_existe()
+    {
+        $viewPath = resource_path('views/admin/lieux/create.blade.php');
+        $this->assertTrue(
+            file_exists($viewPath),
+            'La vue admin/lieux/create.blade.php doit exister'
         );
     }
 }

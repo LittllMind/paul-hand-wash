@@ -43,4 +43,32 @@ class PresenceControllerTest extends TestCase
             'La vue admin/presences/calendrier.blade.php doit exister'
         );
     }
+
+    // ========== T2.3: Création Créneaux Batch ==========
+    public function test_presence_controller_a_methode_create_batch()
+    {
+        $controller = new \App\Http\Controllers\Admin\PresenceController();
+        $this->assertTrue(
+            method_exists($controller, 'createBatch'),
+            'PresenceController doit avoir une méthode createBatch'
+        );
+    }
+
+    public function test_presence_controller_a_methode_store_batch()
+    {
+        $controller = new \App\Http\Controllers\Admin\PresenceController();
+        $this->assertTrue(
+            method_exists($controller, 'storeBatch'),
+            'PresenceController doit avoir une méthode storeBatch'
+        );
+    }
+
+    public function test_vue_admin_presences_batch_create_existe()
+    {
+        $viewPath = resource_path('views/admin/presences/batch-create.blade.php');
+        $this->assertTrue(
+            file_exists($viewPath),
+            'La vue admin/presences/batch-create.blade.php doit exister'
+        );
+    }
 }

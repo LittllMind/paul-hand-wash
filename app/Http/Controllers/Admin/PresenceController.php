@@ -54,4 +54,42 @@ class PresenceController extends Controller
             'titreMois' => $debut->translatedFormat('F Y'),
         ]);
     }
+
+    /**
+     * Show the form for creating batch presences.
+     */
+    public function createBatch()
+    {
+        $lieux = Lieu::all();
+        return view('admin.presences.batch-create', compact('lieux'));
+    }
+
+    /**
+     * Store batch presences.
+     */
+    public function storeBatch(Request $request)
+    {
+        $validated = $request->validate([
+            'lieu_id' => 'required|exists:lieux,id',
+            'dates' => 'required|array',
+            'dates.*' => 'required|date',
+            'heure_debut' => 'required|date_format:H:i',
+            'heure_fin' => 'required|date_format:H:i|after:heure_debut',
+        ]);
+
+        $count = 0;
+        foreach ($validated['dates'] as $date) {
+            Presence::create([
+                'lieu_id' => $validated['lieu_id'],
+                'date' => $date,
+                'heure_debut' => $validated['heure_debut'],
+                'heure_fin' => $validated['heure_fin'],
+                'est_reserve' => false,
+            ]);
+            $count++;
+        }
+
+        return redirect()->route('admin.presences.index')
+            ->with('success', "$count créneaux créés avec succès.");
+    }
 }

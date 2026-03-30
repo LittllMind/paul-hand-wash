@@ -64,6 +64,7 @@
         @endforeach
     </div>
 
-    <a href="{{ route('admin.lieux.index') }}">← Retour aux lieux</a>
+    <a href="{{ route('admin.lieux.index') }}">← Retour aux lieux</a> | 
+    <a href="{{ route('admin.presences.batch') }}">+ Créer créneaux en batch</a>
 </body>
 </html>

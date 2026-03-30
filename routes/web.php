@@ -18,3 +18,5 @@ Route::delete('/admin/lieux/{lieu}', [LieuController::class, 'destroy'])->name('
 
 // ========== Admin: Présences ==========
 Route::get('/admin/presences', [PresenceController::class, 'index'])->name('admin.presences.index');
+Route::get('/admin/presences/batch', [PresenceController::class, 'createBatch'])->name('admin.presences.batch');
+Route::post('/admin/presences/batch', [PresenceController::class, 'storeBatch'])->name('admin.presences.batch');

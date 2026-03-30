@@ -12,3 +12,4 @@ Route::get('/admin/lieux/create', [LieuController::class, 'create'])->name('admi
 Route::post('/admin/lieux', [LieuController::class, 'store'])->name('admin.lieux.store');
 Route::get('/admin/lieux/{lieu}/edit', [LieuController::class, 'edit'])->name('admin.lieux.edit');
 Route::put('/admin/lieux/{lieu}', [LieuController::class, 'update'])->name('admin.lieux.update');
+Route::delete('/admin/lieux/{lieu}', [LieuController::class, 'destroy'])->name('admin.lieux.destroy');

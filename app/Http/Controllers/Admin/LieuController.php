@@ -72,4 +72,15 @@ class LieuController extends Controller
         return redirect()->route('admin.lieux.index')
             ->with('success', 'Lieu mis à jour avec succès.');
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Lieu $lieu)
+    {
+        $lieu->delete();
+
+        return redirect()->route('admin.lieux.index')
+            ->with('success', 'Lieu supprimé avec succès.');
+    }
 }

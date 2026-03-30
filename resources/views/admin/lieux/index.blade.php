@@ -7,7 +7,13 @@
 </head>
 <body>
     <h1>Liste des Lieux</h1>
-    
+
+    @if(session('success'))
+        <div style="color: green;">{{ session('success') }}</div>
+    @endif
+
+    <a href="{{ route('admin.lieux.create') }}">+ Nouveau Lieu</a>
+
     <table border="1">
         <thead>
             <tr>
@@ -16,6 +22,7 @@
                 <th>Adresse</th>
                 <th>Ville</th>
                 <th>Code Postal</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -26,15 +33,23 @@
                     <td>{{ $lieu->adresse }}</td>
                     <td>{{ $lieu->ville }}</td>
                     <td>{{ $lieu->code_postal }}</td>
+                    <td>
+                        <a href="{{ route('admin.lieux.edit', $lieu) }}">Modifier</a>
+                        <form action="{{ route('admin.lieux.destroy', $lieu) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" onclick="return confirm('Supprimer ce lieu ?')">Supprimer</button>
+                        </form>
+                    </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="5">Aucun lieu trouvé</td>
+                    <td colspan="6">Aucun lieu trouvé</td>
                 </tr>
             @endforelse
         </tbody>
     </table>
-    
+
     {{ $lieux->links() }}
 </body>
 </html>

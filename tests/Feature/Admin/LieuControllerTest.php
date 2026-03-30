@@ -99,4 +99,14 @@ class LieuControllerTest extends TestCase
             'La vue admin/lieux/edit.blade.php doit exister'
         );
     }
+
+    // ========== T1.5: Delete ==========
+    public function test_lieu_controller_a_methode_destroy()
+    {
+        $controller = new \App\Http\Controllers\Admin\LieuController();
+        $this->assertTrue(
+            method_exists($controller, 'destroy'),
+            'LieuController doit avoir une méthode destroy'
+        );
+    }
 }

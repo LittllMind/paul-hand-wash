@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->date('date');
             $table->time('heure_debut')->default('09:00');
             $table->time('heure_fin')->default('19:00');
-            $table->boolean('actif')->default(true);
+            $table->boolean('est_reserve')->default(false);
             $table->timestamps();
         });
     }

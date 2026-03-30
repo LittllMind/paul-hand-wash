@@ -11,6 +11,7 @@ Route::get('/', function () {
 
 // ========== Front: Réservations ==========
 Route::get('/reserver', [ReservationController::class, 'index'])->name('reserver');
+Route::get('/reserver/{presence}', [ReservationController::class, 'show'])->name('reserver.show');
 
 // ========== Admin: Lieux ==========
 Route::get('/admin/lieux', [LieuController::class, 'index'])->name('admin.lieux.index');

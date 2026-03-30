@@ -72,7 +72,7 @@
                                     📍 {{ $creneau->lieu->nom }}
                                 </div>
                             </div>
-                            <a href="#" class="btn-reserver">Choisir ce créneau →</a>
+                            <a href="{{ route('reserver.show', $creneau) }}" class="btn-reserver">Choisir ce créneau →</a>
                         </div>
                     </div>
                 @endforeach

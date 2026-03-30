@@ -44,4 +44,43 @@ class ReservationController extends Controller
             'creneaux' => $creneaux,
         ]);
     }
+
+    /**
+     * Show the reservation form for a specific slot.
+     */
+    public function show(Presence $presence)
+    {
+        // Vérifier que le créneau est disponible
+        if ($presence->est_reserve) {
+            return redirect()->route('reserver')
+                ->with('error', 'Ce créneau n\'est plus disponible.');
+        }
+
+        // Prestations disponibles
+        $prestations = [
+            'Express' => [
+                'nom' => 'Lavage Express',
+                'prix' => 15,
+                'duree' => '20 min',
+                'description' => 'Lavage extérieur rapide'
+            ],
+            'Essentiel' => [
+                'nom' => 'Lavage Essentiel',
+                'prix' => 25,
+                'duree' => '45 min',
+                'description' => 'Intérieur + extérieur'
+            ],
+            'Premium' => [
+                'nom' => 'Lavage Premium',
+                'prix' => 45,
+                'duree' => '90 min',
+                'description' => 'Lavage complet + cire + jantes'
+            ],
+        ];
+
+        return view('reservations.formulaire', [
+            'creneau' => $presence,
+            'prestations' => $prestations,
+        ]);
+    }
 }

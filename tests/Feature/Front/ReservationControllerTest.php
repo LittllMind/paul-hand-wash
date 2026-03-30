@@ -43,4 +43,23 @@ class ReservationControllerTest extends TestCase
             'La vue reservations/choix-creneau.blade.php doit exister'
         );
     }
+
+    // ========== T3.2: Formulaire Réservation ==========
+    public function test_reservation_controller_a_methode_show()
+    {
+        $controller = new \App\Http\Controllers\Front\ReservationController();
+        $this->assertTrue(
+            method_exists($controller, 'show'),
+            'ReservationController doit avoir une méthode show'
+        );
+    }
+
+    public function test_vue_formulaire_reservation_existe()
+    {
+        $viewPath = resource_path('views/reservations/formulaire.blade.php');
+        $this->assertTrue(
+            file_exists($viewPath),
+            'La vue reservations/formulaire.blade.php doit exister'
+        );
+    }
 }

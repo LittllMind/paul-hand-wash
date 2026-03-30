@@ -3,10 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LieuController;
 use App\Http\Controllers\Admin\PresenceController;
+use App\Http\Controllers\Front\ReservationController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+// ========== Front: Réservations ==========
+Route::get('/reserver', [ReservationController::class, 'index'])->name('reserver');
 
 // ========== Admin: Lieux ==========
 Route::get('/admin/lieux', [LieuController::class, 'index'])->name('admin.lieux.index');

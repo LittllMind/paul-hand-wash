@@ -8,10 +8,12 @@ use Illuminate\Http\Request;
 
 class LieuController extends Controller
 {
-    public function index(Request $request)
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
-        $lieux = Lieu::latest()->paginate(10);
-
+        $lieux = Lieu::paginate(15);
         return view('admin.lieux.index', compact('lieux'));
     }
 }

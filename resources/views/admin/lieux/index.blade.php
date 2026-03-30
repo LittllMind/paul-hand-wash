@@ -1,42 +1,40 @@
-<x-layouts.admin title="Gestion des lieux">
-    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="p-6 bg-white border-b border-gray-200">
-            <h2 class="text-2xl font-bold mb-4">Liste des lieux</h2>
-
-            @if($lieux->isEmpty())
-                <p class="text-gray-500">Aucun lieu enregistré.</p>
-            @else
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Adresse</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ville</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Code postal</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        @foreach($lieux as $lieu)
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $lieu->nom }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $lieu->adresse }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $lieu->ville }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $lieu->code_postal }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900 mr-2">Voir</a>
-                                    <a href="#" class="text-blue-600 hover:text-blue-900 mr-2">Modifier</a>
-                                    <a href="#" class="text-red-600 hover:text-red-900">Supprimer</a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-
-                <div class="mt-4">
-                    {{ $lieux->links() }}
-                </div>
-            @endif
-        </div>
-    </div>
-</x-layouts.admin>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Lieux - Paul Hand Wash</title>
+</head>
+<body>
+    <h1>Liste des Lieux</h1>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Ville</th>
+                <th>Code Postal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($lieux as $lieu)
+                <tr>
+                    <td>{{ $lieu->id }}</td>
+                    <td>{{ $lieu->nom }}</td>
+                    <td>{{ $lieu->adresse }}</td>
+                    <td>{{ $lieu->ville }}</td>
+                    <td>{{ $lieu->code_postal }}</td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="5">Aucun lieu trouvé</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+    
+    {{ $lieux->links() }}
+</body>
+</html>

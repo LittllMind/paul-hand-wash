@@ -120,6 +120,23 @@ class LieuControllerTest extends TestCase
         );
     }
 
+    public function test_admin_peut_modifier_lieu()
+    {
+        $lieu = Lieu::factory()->create();
+
+        $response = $this->put("/admin/lieux/{$lieu->id}", [
+            'nom' => 'Nom Modifié',
+            'adresse' => $lieu->adresse,
+            'ville' => $lieu->ville,
+            'code_postal' => $lieu->code_postal,
+            'latitude' => $lieu->latitude,
+            'longitude' => $lieu->longitude,
+        ]);
+
+        $response->assertRedirect('/admin/lieux');
+        $this->assertDatabaseHas('lieux', ['nom' => 'Nom Modifié']);
+    }
+
     // ========== T1.5: Delete ==========
     public function test_lieu_controller_a_methode_destroy()
     {
@@ -128,5 +145,15 @@ class LieuControllerTest extends TestCase
             method_exists($controller, 'destroy'),
             'LieuController doit avoir une méthode destroy'
         );
+    }
+
+    public function test_admin_peut_supprimer_lieu()
+    {
+        $lieu = Lieu::factory()->create();
+
+        $response = $this->delete("/admin/lieux/{$lieu->id}");
+
+        $response->assertRedirect('/admin/lieux');
+        $this->assertDatabaseMissing('lieux', ['id' => $lieu->id]);
     }
 }

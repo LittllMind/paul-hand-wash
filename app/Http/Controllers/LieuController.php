@@ -43,4 +43,31 @@ class LieuController extends Controller
     {
         return view('lieux.show', compact('lieu'));
     }
+
+    /**
+     * Show the form for editing the specified lieu.
+     */
+    public function edit(Lieu $lieu): View
+    {
+        return view('lieux.edit', compact('lieu'));
+    }
+
+    /**
+     * Update the specified lieu in storage.
+     */
+    public function update(Request $request, Lieu $lieu): RedirectResponse
+    {
+        $validated = $request->validate([
+            'nom' => 'required|string|max:255',
+            'adresse' => 'required|string|max:255',
+            'code_postal' => 'required|string|max:20',
+            'ville' => 'required|string|max:255',
+            'pays' => 'required|string|max:255',
+        ]);
+
+        $lieu->update($validated);
+
+        return redirect()->route('lieux.show', $lieu)
+            ->with('success', 'Lieu mis à jour avec succès.');
+    }
 }

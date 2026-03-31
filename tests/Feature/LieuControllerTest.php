@@ -145,4 +145,134 @@ class LieuControllerTest extends TestCase
         $response->assertViewIs('lieux.show');
         $response->assertViewHas('lieu', $lieu);
     }
+
+    /** @test */
+    public function it_can_display_the_edit_form(): void
+    {
+        $lieu = Lieu::factory()->create();
+
+        $response = $this->get(route('lieux.edit', $lieu));
+
+        $response->assertStatus(200);
+        $response->assertViewIs('lieux.edit');
+        $response->assertViewHas('lieu', $lieu);
+    }
+
+    /** @test */
+    public function it_can_update_a_lieu(): void
+    {
+        $lieu = Lieu::factory()->create([
+            'nom' => 'Ancien Nom',
+            'adresse' => 'Ancienne Adresse',
+        ]);
+
+        $data = [
+            'nom' => 'Nouveau Nom',
+            'adresse' => 'Nouvelle Adresse',
+            'code_postal' => '69000',
+            'ville' => 'Lyon',
+            'pays' => 'France',
+        ];
+
+        $response = $this->put(route('lieux.update', $lieu), $data);
+
+        $response->assertRedirect(route('lieux.show', $lieu));
+        $response->assertSessionHas('success');
+
+        $this->assertDatabaseHas('lieux', [
+            'id' => $lieu->id,
+            'nom' => 'Nouveau Nom',
+            'adresse' => 'Nouvelle Adresse',
+        ]);
+    }
+
+    /** @test */
+    public function it_requires_a_nom_to_update_lieu(): void
+    {
+        $lieu = Lieu::factory()->create();
+
+        $data = [
+            'nom' => '',
+            'adresse' => '123 Rue Test',
+            'code_postal' => '75000',
+            'ville' => 'Paris',
+            'pays' => 'France',
+        ];
+
+        $response = $this->put(route('lieux.update', $lieu), $data);
+
+        $response->assertSessionHasErrors('nom');
+    }
+
+    /** @test */
+    public function it_requires_an_adresse_to_update_lieu(): void
+    {
+        $lieu = Lieu::factory()->create();
+
+        $data = [
+            'nom' => 'Lieu Test',
+            'adresse' => '',
+            'code_postal' => '75000',
+            'ville' => 'Paris',
+            'pays' => 'France',
+        ];
+
+        $response = $this->put(route('lieux.update', $lieu), $data);
+
+        $response->assertSessionHasErrors('adresse');
+    }
+
+    /** @test */
+    public function it_requires_a_code_postal_to_update_lieu(): void
+    {
+        $lieu = Lieu::factory()->create();
+
+        $data = [
+            'nom' => 'Lieu Test',
+            'adresse' => '123 Rue Test',
+            'code_postal' => '',
+            'ville' => 'Paris',
+            'pays' => 'France',
+        ];
+
+        $response = $this->put(route('lieux.update', $lieu), $data);
+
+        $response->assertSessionHasErrors('code_postal');
+    }
+
+    /** @test */
+    public function it_requires_a_ville_to_update_lieu(): void
+    {
+        $lieu = Lieu::factory()->create();
+
+        $data = [
+            'nom' => 'Lieu Test',
+            'adresse' => '123 Rue Test',
+            'code_postal' => '75000',
+            'ville' => '',
+            'pays' => 'France',
+        ];
+
+        $response = $this->put(route('lieux.update', $lieu), $data);
+
+        $response->assertSessionHasErrors('ville');
+    }
+
+    /** @test */
+    public function it_requires_a_pays_to_update_lieu(): void
+    {
+        $lieu = Lieu::factory()->create();
+
+        $data = [
+            'nom' => 'Lieu Test',
+            'adresse' => '123 Rue Test',
+            'code_postal' => '75000',
+            'ville' => 'Paris',
+            'pays' => '',
+        ];
+
+        $response = $this->put(route('lieux.update', $lieu), $data);
+
+        $response->assertSessionHasErrors('pays');
+    }
 }

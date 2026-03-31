@@ -133,4 +133,28 @@ class LieuTest extends TestCase
 
         $this->assertDatabaseHas('lieux', ['nom' => 'Test Parking']);
     }
+
+    /**
+     * Tests T1.1 - Validation des données requises
+     */
+    public function test_lieu_peut_etre_cree_avec_donnees_valides()
+    {
+        $lieu = Lieu::create([
+            'nom' => 'Parking Centre Commercial',
+            'adresse' => '123 Rue de Paris',
+            'ville' => 'Rozier',
+            'code_postal' => '12345',
+            'latitude' => 45.123,
+            'longitude' => 5.678,
+        ]);
+        
+        $this->assertDatabaseHas('lieux', ['nom' => 'Parking Centre Commercial']);
+        $this->assertEquals('Rozier', $lieu->ville);
+    }
+
+    public function test_lieu_requiert_nom_et_adresse()
+    {
+        $this->expectException(\Illuminate\Database\QueryException::class);
+        Lieu::create(['ville' => 'Rozier']);
+    }
 }

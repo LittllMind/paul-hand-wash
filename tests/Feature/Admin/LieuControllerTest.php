@@ -72,6 +72,26 @@ class LieuControllerTest extends TestCase
         );
     }
 
+    public function test_admin_peut_creer_lieu()
+    {
+        $data = [
+            'nom' => 'Nouveau Lieu',
+            'adresse' => '123 Rue de Test',
+            'ville' => 'Testville',
+            'code_postal' => '75000',
+            'latitude' => 48.8566,
+            'longitude' => 2.3522,
+        ];
+
+        $response = $this->post('/admin/lieux', $data);
+
+        $response->assertRedirect('/admin/lieux');
+        $this->assertDatabaseHas('lieux', [
+            'nom' => 'Nouveau Lieu',
+            'ville' => 'Testville',
+        ]);
+    }
+
     // ========== T1.4: Edit/Update ==========
     public function test_lieu_controller_a_methode_edit()
     {

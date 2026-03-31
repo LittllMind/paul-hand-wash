@@ -3,12 +3,43 @@
 namespace Tests\Unit\Models;
 
 use App\Models\Lieu;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class LieuTest extends TestCase
 {
-    // Tests sans RefreshDatabase car SQLite non disponible
-    // Ces tests valident la structure du modèle
+    // Tests de structure sans base de données
+
+    public function test_lieu_peut_etre_cree_avec_donnees_valides()
+    {
+        // Test que le modèle accepte les attributs fillable correctement
+        $lieu = new Lieu([
+            'nom' => 'Parking Centre Commercial',
+            'adresse' => '123 Rue de Paris',
+            'ville' => 'Rozier',
+            'code_postal' => '12345',
+            'latitude' => 45.123,
+            'longitude' => 5.678,
+        ]);
+        
+        $this->assertEquals('Parking Centre Commercial', $lieu->nom);
+        $this->assertEquals('Rozier', $lieu->ville);
+        $this->assertEquals(45.123, $lieu->latitude);
+        $this->assertEquals(5.678, $lieu->longitude);
+    }
+
+    public function test_lieu_requiert_nom_et_adresse_dans_fillable()
+    {
+        // Vérifie que nom et adresse sont dans fillable (peut être assigné en masse)
+        $lieu = new Lieu();
+        $reflection = new \ReflectionClass($lieu);
+        $property = $reflection->getProperty('fillable');
+        $property->setAccessible(true);
+        $fillable = $property->getValue($lieu);
+        
+        $this->assertContains('nom', $fillable);
+        $this->assertContains('adresse', $fillable);
+    }
 
     public function test_lieu_a_bons_attributs_fillable()
     {

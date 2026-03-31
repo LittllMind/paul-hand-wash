@@ -116,24 +116,12 @@ class LieuTest extends TestCase
 
     public function test_table_lieu_existe_dans_bdd()
     {
-        // Test qui sera rouge tant que migrate n'est pas fait
-        // Nécessite SQLite - marqué comme skipped si pas disponible
-        if (!extension_loaded('pdo_sqlite')) {
-            $this->markTestSkipped('SQLite extension not available');
-        }
-
         $this->artisan('migrate:fresh');
         $this->assertTrue(\Schema::hasTable('lieux'));
     }
 
     public function test_lieu_peut_etre_cree_en_base()
     {
-        // Test qui sera rouge tant que migrate n'est pas fait
-        // Nécessite SQLite - marqué comme skipped si pas disponible
-        if (!extension_loaded('pdo_sqlite')) {
-            $this->markTestSkipped('SQLite extension not available');
-        }
-
         $this->artisan('migrate:fresh');
         
         $lieu = Lieu::create([

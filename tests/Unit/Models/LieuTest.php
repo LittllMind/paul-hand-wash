@@ -3,14 +3,18 @@
 namespace Tests\Unit\Models;
 
 use App\Models\Lieu;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Tests\TestCase;
 
 class LieuTest extends TestCase
 {
-    // Tests de structure sans base de données
+    /**
+     * Tests structure du modèle sans base de données
+     * (SQLite non disponible, testons la structure)
+     */
 
-    public function test_lieu_peut_etre_cree_avec_donnees_valides()
+    public function test_lieu_peut_etre_instancie_avec_donnees_valides()
     {
         // Test que le modèle accepte les attributs fillable correctement
         $lieu = new Lieu([
@@ -41,7 +45,7 @@ class LieuTest extends TestCase
         $this->assertContains('adresse', $fillable);
     }
 
-    public function test_lieu_a_bons_attributs_fillable()
+    public function test_lieu_a_tous_les_attributs_fillable()
     {
         $lieu = new Lieu();
         $reflection = new \ReflectionClass($lieu);
@@ -79,13 +83,66 @@ class LieuTest extends TestCase
         $this->assertTrue(method_exists($lieu, 'presences'));
     }
 
-    public function test_lieu_structure_model_est_valide()
+    public function test_lieu_etend_model()
     {
         // Vérification que la classe Lieu existe et étend Model
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Model::class, new Lieu());
-        
+        $this->assertInstanceOf(Model::class, new Lieu());
+    }
+
+    public function test_lieu_utilise_has_factory()
+    {
         // Vérification qu'elle utilise HasFactory
         $uses = class_uses(Lieu::class);
-        $this->assertContains(\Illuminate\Database\Eloquent\Factories\HasFactory::class, $uses);
+        $this->assertContains(HasFactory::class, $uses);
+    }
+
+    public function test_lieu_factory_existe()
+    {
+        // Vérification que la factory existe
+        $this->assertTrue(class_exists(\Database\Factories\LieuFactory::class));
+    }
+
+    public function test_migration_lieu_existe()
+    {
+        // Vérification que la migration existe
+        $migrationPath = database_path('migrations/2026_03_29_000001_create_lieux_table.php');
+        $this->assertFileExists($migrationPath);
+        
+        // Vérification du contenu basique
+        $content = file_get_contents($migrationPath);
+        $this->assertStringContainsString('create', $content);
+        $this->assertStringContainsString('lieux', $content);
+    }
+
+    public function test_table_lieu_existe_dans_bdd()
+    {
+        // Test qui sera rouge tant que migrate n'est pas fait
+        // Nécessite SQLite - marqué comme skipped si pas disponible
+        if (!extension_loaded('pdo_sqlite')) {
+            $this->markTestSkipped('SQLite extension not available');
+        }
+
+        $this->artisan('migrate:fresh');
+        $this->assertTrue(\Schema::hasTable('lieux'));
+    }
+
+    public function test_lieu_peut_etre_cree_en_base()
+    {
+        // Test qui sera rouge tant que migrate n'est pas fait
+        // Nécessite SQLite - marqué comme skipped si pas disponible
+        if (!extension_loaded('pdo_sqlite')) {
+            $this->markTestSkipped('SQLite extension not available');
+        }
+
+        $this->artisan('migrate:fresh');
+        
+        $lieu = Lieu::create([
+            'nom' => 'Test Parking',
+            'adresse' => '123 Test Street',
+            'ville' => 'Testville',
+            'code_postal' => '12345',
+        ]);
+
+        $this->assertDatabaseHas('lieux', ['nom' => 'Test Parking']);
     }
 }

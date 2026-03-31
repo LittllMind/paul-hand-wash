@@ -16,6 +16,7 @@ class Lieu extends Model
         'adresse',
         'ville',
         'code_postal',
+        'pays',
         'latitude',
         'longitude',
     ];

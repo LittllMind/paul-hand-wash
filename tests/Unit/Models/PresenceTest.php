@@ -2,11 +2,16 @@
 
 namespace Tests\Unit\Models;
 
+use App\Models\Lieu;
 use App\Models\Presence;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
 class PresenceTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_presence_a_bons_attributs_fillable()
     {
         $presence = new Presence();
@@ -61,5 +66,31 @@ class PresenceTest extends TestCase
             \Illuminate\Database\Eloquent\Factories\HasFactory::class,
             $uses
         );
+    }
+
+    public function test_presence_appartient_a_lieu()
+    {
+        $lieu = Lieu::factory()->create();
+        $presence = Presence::create([
+            'lieu_id' => $lieu->id,
+            'date' => '2026-04-01',
+            'heure_debut' => '09:00',
+            'heure_fin' => '17:00',
+            'est_reserve' => false,
+        ]);
+        $this->assertEquals($lieu->id, $presence->lieu->id);
+    }
+
+    public function test_presence_a_creneaux_horaires_valides()
+    {
+        $this->expectException(ValidationException::class);
+        $lieu = Lieu::factory()->create();
+        Presence::create([
+            'lieu_id' => $lieu->id,
+            'date' => '2026-04-01',
+            'heure_debut' => '17:00',
+            'heure_fin' => '09:00',
+            'est_reserve' => false,
+        ]);
     }
 }

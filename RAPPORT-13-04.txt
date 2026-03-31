@@ -1,0 +1,11 @@
+=== T1.3 ÉTAT ===
+Branche: feature/T1.3-lieucontroller-create
+Fichiers modifiés:
+?? RAPPORT-13-04.txt
+Tests existants:
+total 16
+drwxrwxr-x 2 aur-lien aur-lien 4096 mars  31 08:41 .
+drwxrwxr-x 4 aur-lien aur-lien 4096 mars  31 07:13 ..
+-rw-rw-r-- 1 aur-lien aur-lien 4010 mars  31 12:27 LieuControllerTest.php
+-rw-rw-r-- 1 aur-lien aur-lien 2401 mars  31 07:13 PresenceControllerTest.php
+=== FIN ===

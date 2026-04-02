@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('evenements', function (Blueprint $table) {
             $table->id();
+            $table->string('titre');
+            $table->text('description')->nullable();
+            $table->dateTime('date_debut')->nullable();
+            $table->dateTime('date_fin')->nullable();
+            $table->foreignId('lieu_id')->constrained('lieux')->onDelete('cascade');
             $table->foreignId('categorie_id')->nullable()->constrained('categories')->onDelete('set null');
             $table->timestamps();
         });

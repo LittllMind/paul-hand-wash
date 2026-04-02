@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Lieu extends Model
 {
@@ -29,5 +30,10 @@ class Lieu extends Model
     public function presences()
     {
         return $this->hasMany(Presence::class);
+    }
+
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(Categorie::class, 'categorie_lieu');
     }
 }

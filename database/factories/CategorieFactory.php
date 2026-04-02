@@ -20,7 +20,7 @@ class CategorieFactory extends Factory
         return [
             'nom' => fake()->word(),
             'description' => fake()->sentence(),
-            'couleur' => '#' . fake()->hexColor(),
+            'couleur' => fake()->hexColor(),
         ];
     }
 }

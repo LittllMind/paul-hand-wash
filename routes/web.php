@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LieuController;
+use App\Http\Controllers\Admin\CategorieController;
 use App\Http\Controllers\Admin\PresenceController;
 use App\Http\Controllers\Front\ReservationController;
 
@@ -22,6 +23,14 @@ Route::post('/admin/lieux', [LieuController::class, 'store'])->name('admin.lieux
 Route::get('/admin/lieux/{lieu}/edit', [LieuController::class, 'edit'])->name('admin.lieux.edit');
 Route::put('/admin/lieux/{lieu}', [LieuController::class, 'update'])->name('admin.lieux.update');
 Route::delete('/admin/lieux/{lieu}', [LieuController::class, 'destroy'])->name('admin.lieux.destroy');
+
+// ========== Admin: Catégories ==========
+Route::get('/admin/categories', [CategorieController::class, 'index'])->name('admin.categories.index');
+Route::get('/admin/categories/create', [CategorieController::class, 'create'])->name('admin.categories.create');
+Route::post('/admin/categories', [CategorieController::class, 'store'])->name('admin.categories.store');
+Route::get('/admin/categories/{categorie}/edit', [CategorieController::class, 'edit'])->name('admin.categories.edit');
+Route::put('/admin/categories/{categorie}', [CategorieController::class, 'update'])->name('admin.categories.update');
+Route::delete('/admin/categories/{categorie}', [CategorieController::class, 'destroy'])->name('admin.categories.destroy');
 
 // ========== Admin: Présences ==========
 Route::get('/admin/presences', [PresenceController::class, 'index'])->name('admin.presences.index');

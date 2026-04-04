@@ -76,6 +76,14 @@
             @enderror
         </div>
 
+        <div>
+            <label for="places_limite">Nombre de places (optionnel)</label>
+            <input type="number" name="places_limite" id="places_limite" value="{{ old('places_limite', $evenement->places_limite) }}" min="1">
+            @error('places_limite')
+                <span>{{ $message }}</span>
+            @enderror
+        </div>
+
         <button type="submit">Mettre à jour</button>
         <a href="{{ route('admin.evenements.index') }}">Annuler</a>
     </form>

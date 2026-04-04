@@ -72,6 +72,15 @@ class EvenementController extends Controller
     }
 
     /**
+     * Display participants list for an event.
+     */
+    public function participants(Evenement $evenement)
+    {
+        $evenement->load(['users']);
+        return view('admin.evenements.participants', compact('evenement'));
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(Evenement $evenement)

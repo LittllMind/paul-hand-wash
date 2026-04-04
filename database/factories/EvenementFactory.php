@@ -28,6 +28,14 @@ class EvenementFactory extends Factory
             'date_fin' => $this->faker->dateTimeBetween('+1 month', '+2 months'),
             'lieu_id' => Lieu::factory(),
             'categorie_id' => Categorie::factory(),
+            'places_limite' => null,
         ];
+    }
+
+    public function withPlacesLimit(int $places): self
+    {
+        return $this->state(fn (array $attributes) => [
+            'places_limite' => $places,
+        ]);
     }
 }

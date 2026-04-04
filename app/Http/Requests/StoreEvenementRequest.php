@@ -28,6 +28,7 @@ class StoreEvenementRequest extends FormRequest
             'date_fin' => 'nullable|date|after_or_equal:date_debut',
             'lieu_id' => 'required|exists:lieux,id',
             'categorie_id' => 'nullable|exists:categories,id',
+            'places_limite' => 'nullable|integer|min:1',
         ];
     }
 }

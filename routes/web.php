@@ -61,7 +61,24 @@ Route::get('/admin/domaines/{domaine}/edit', [DomainController::class, 'edit'])-
 Route::put('/admin/domaines/{domaine}', [DomainController::class, 'update'])->name('admin.domaines.update');
 Route::delete('/admin/domaines/{domaine}', [DomainController::class, 'destroy'])->name('admin.domaines.destroy');
 
+use App\Http\Controllers\Front\InscriptionEvenementController;
+
+// Simple login route for tests
+Route::get('/login', function () {
+    return redirect('/');
+})->name('login');
+
+// ========== Front: Inscriptions Événements ==========
+Route::post('/evenements/{evenement}/inscrire', [InscriptionEvenementController::class, 'inscrire'])
+    ->name('evenements.inscrire')
+    ->middleware('auth');
+Route::delete('/evenements/{evenement}/desinscrire', [InscriptionEvenementController::class, 'desinscrire'])
+    ->name('evenements.desinscrire')
+    ->middleware('auth');
+
 // ========== Admin: Événements ==========
+Route::get('/admin/evenements/{evenement}/participants', [EvenementController::class, 'participants'])
+    ->name('admin.evenements.participants');
 Route::get('/admin/evenements', [EvenementController::class, 'index'])->name('admin.evenements.index');
 Route::get('/admin/evenements/create', [EvenementController::class, 'create'])->name('admin.evenements.create');
 Route::post('/admin/evenements', [EvenementController::class, 'store'])->name('admin.evenements.store');

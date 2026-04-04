@@ -8,16 +8,18 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('presence_id')->constrained()->onDelete('cascade');
             $table->string('client_nom', 100);
             $table->string('client_telephone', 20);
             $table->string('client_email', 100)->nullable();
-            $table->date('date');
-            $table->time('heure');
-            $table->enum('prestation', ['express', 'essentiel', 'premium']);
-            $table->decimal('prix', 8, 2);
-            $table->enum('statut', ['nouveau', 'confirme', 'annule', 'termine'])->default('nouveau');
+            $table->string('prestation', 50);
+            $table->decimal('montant', 8, 2);
+            $table->boolean('paye')->default(false);
             $table->text('notes')->nullable();
             $table->timestamps();
+
+            $table->index('presence_id');
+            $table->index('paye');
         });
     }
 

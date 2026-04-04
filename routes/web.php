@@ -5,16 +5,27 @@ use App\Http\Controllers\Admin\LieuController;
 use App\Http\Controllers\Admin\CategorieController;
 use App\Http\Controllers\Admin\PresenceController;
 use App\Http\Controllers\Front\ReservationController;
+use App\Http\Controllers\Front\PaymentController;
+use App\Http\Controllers\StripeWebhookController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 // ========== Front: Réservations ==========
 Route::get('/reserver', [ReservationController::class, 'index'])->name('reserver');
 Route::get('/reserver/{presence}', [ReservationController::class, 'show'])->name('reserver.show');
 Route::post('/reserver/{presence}', [ReservationController::class, 'store'])->name('reserver.store');
 Route::get('/reservation/{reservation}/confirmation', [ReservationController::class, 'confirmation'])->name('reserver.confirmation');
+
+// ========== Front: Paiement Stripe ==========
+Route::get('/payment/checkout/{reservation}', [PaymentController::class, 'checkout'])->name('payment.checkout');
+Route::post('/payment/checkout-session', [PaymentController::class, 'createCheckoutSession'])->name('payment.checkout-session');
+Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
+Route::get('/payment/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
+
+// ========== Stripe Webhook ==========
+Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle'])->name('stripe.webhook');
 
 // ========== Admin: Lieux ==========
 Route::get('/admin/lieux', [LieuController::class, 'index'])->name('admin.lieux.index');

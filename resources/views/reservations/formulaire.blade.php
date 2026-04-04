@@ -1,9 +1,22 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finaliser votre réservation - Paul Hand Wash</title>
+@extends('layouts.front')
+
+@section('meta')
+    <title>Finaliser votre réservation - Paolo Wash | {{ $creneau->date->format('d/m/Y') }} {{ $creneau->lieu->nom }}</title>
+    <meta name="description" content="Finalisez votre réservation de lavage auto à {{ $creneau->lieu->nom }} le {{ $creneau->date->translatedFormat('d F Y') }}.">
+    <meta name="keywords" content="réservation, lavage auto, {{ $creneau->lieu->nom }}, Paolo Wash">
+    <link rel="canonical" href="{{ route('reserver.show', $creneau) }}">
+    
+    <meta property="og:title" content="Finaliser votre réservation - Paolo Wash">
+    <meta property="og:description" content="Réservation pour le {{ $creneau->date->format('d/m/Y') }} à {{ $creneau->lieu->nom }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ route('reserver.show', $creneau) }}">
+    <meta property="og:site_name" content="Paolo Wash">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Finaliser votre réservation - Paolo Wash">
+@endsection
+
+@push('styles')
     <style>
         body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; }
         h1 { color: #333; }
@@ -22,8 +35,9 @@
         .btn-submit:hover { background: #45a049; }
         .back-link { display: block; margin-top: 20px; text-align: center; color: #666; }
     </style>
-</head>
-<body>
+@endpush
+
+@section('content')
     <h1>🚗 Finaliser votre réservation</h1>
 
     <div class="recap">
@@ -71,5 +85,4 @@
     </form>
 
     <a href="{{ route('reserver') }}" class="back-link">← Choisir un autre créneau</a>
-</body>
-</html>
+@endsection

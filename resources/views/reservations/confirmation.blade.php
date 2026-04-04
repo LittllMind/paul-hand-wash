@@ -1,9 +1,19 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Réservation confirmée - Paul Hand Wash</title>
+@extends('layouts.front')
+
+@section('meta')
+    <title>Réservation confirmée - Paolo Wash | Confirmation #{{ $reservation->id }}</title>
+    <meta name="description" content="Votre réservation de lavage auto a été confirmée. Retrouvez tous les détails de votre rendez-vous.">
+    <meta name="keywords" content="confirmation, réservation, lavage auto, Paolo Wash">
+    <link rel="canonical" href="{{ route('reserver.confirmation', $reservation) }}">
+    <meta name="robots" content="noindex">
+    
+    <meta property="og:title" content="Réservation confirmée - Paolo Wash">
+    <meta property="og:description" content="Votre réservation a été confirmée !">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ route('reserver.confirmation', $reservation) }}">
+@endsection
+
+@push('styles')
     <style>
         body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; text-align: center; }
         h1 { color: #4CAF50; }
@@ -18,8 +28,9 @@
         .btn:hover { background: #1976D2; }
         .info-box { background: #fff3cd; border: 1px solid #ffc107; padding: 15px; border-radius: 6px; margin: 20px 0; }
     </style>
-</head>
-<body>
+@endpush
+
+@section('content')
     <div class="success-icon">✅</div>
     <h1>Réservation confirmée !</h1>
 
@@ -77,8 +88,7 @@
     <a href="{{ route('reserver') }}" class="btn">Nouvelle réservation</a>
     <a href="/" class="btn" style="background: #666;">Retour à l'accueil</a>
 
-    <footer style="margin-top: 40px; color: #999;">
+    @push('footer')
         <p>Paul Hand Wash - Merci de votre confiance !</p>
-    </footer>
-</body>
-</html>
+    @endpush
+@endsection

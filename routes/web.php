@@ -14,7 +14,7 @@ use App\Models\Domain;
 
 Route::get('/', function () {
     $domaines = Domain::active()->get();
-    return view('landing', compact('domaines'));
+    return view('home', compact('domaines'));
 })->name('home');
 
 // ========== Front: Réservations ==========
@@ -62,6 +62,10 @@ Route::put('/admin/domaines/{domaine}', [DomainController::class, 'update'])->na
 Route::delete('/admin/domaines/{domaine}', [DomainController::class, 'destroy'])->name('admin.domaines.destroy');
 
 use App\Http\Controllers\Front\InscriptionEvenementController;
+use App\Http\Controllers\Seo\SitemapController;
+
+// ========== SEO: Sitemap ==========
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 // Simple login route for tests
 Route::get('/login', function () {

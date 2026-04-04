@@ -8,6 +8,7 @@ use App\Models\Lieu;
 use App\Models\Categorie;
 use App\Http\Requests\StoreEvenementRequest;
 use App\Http\Requests\UpdateEvenementRequest;
+use App\Services\Cache\EvenementCacheService;
 
 class EvenementController extends Controller
 {
@@ -46,6 +47,9 @@ class EvenementController extends Controller
     {
         $evenement = Evenement::create($request->validated());
 
+        // Clear cache after creating
+        EvenementCacheService::clear();
+
         return redirect()->route('admin.evenements.index')
             ->with('success', 'Événement créé avec succès.');
     }
@@ -67,6 +71,9 @@ class EvenementController extends Controller
     {
         $evenement->update($request->validated());
 
+        // Clear cache after updating
+        EvenementCacheService::clear();
+
         return redirect()->route('admin.evenements.index')
             ->with('success', 'Événement mis à jour avec succès.');
     }
@@ -86,6 +93,9 @@ class EvenementController extends Controller
     public function destroy(Evenement $evenement)
     {
         $evenement->delete();
+
+        // Clear cache after deleting
+        EvenementCacheService::clear();
 
         return redirect()->route('admin.evenements.index')
             ->with('success', 'Événement supprimé avec succès.');

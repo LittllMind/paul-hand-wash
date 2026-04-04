@@ -10,10 +10,10 @@ use App\Http\Controllers\Front\ReservationController;
 use App\Http\Controllers\Front\PaymentController;
 use App\Http\Controllers\StripeWebhookController;
 
-use App\Models\Domain;
+use App\Services\Cache\DomainCacheService;
 
 Route::get('/', function () {
-    $domaines = Domain::active()->get();
+    $domaines = DomainCacheService::getActiveDomains();
     return view('home', compact('domaines'));
 })->name('home');
 

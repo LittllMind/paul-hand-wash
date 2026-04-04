@@ -3,13 +3,17 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LieuController;
 use App\Http\Controllers\Admin\CategorieController;
+use App\Http\Controllers\Admin\DomainController;
 use App\Http\Controllers\Admin\PresenceController;
 use App\Http\Controllers\Front\ReservationController;
 use App\Http\Controllers\Front\PaymentController;
 use App\Http\Controllers\StripeWebhookController;
 
+use App\Models\Domain;
+
 Route::get('/', function () {
-    return view('welcome');
+    $domaines = Domain::active()->get();
+    return view('landing', compact('domaines'));
 })->name('home');
 
 // ========== Front: Réservations ==========
@@ -47,3 +51,11 @@ Route::delete('/admin/categories/{categorie}', [CategorieController::class, 'des
 Route::get('/admin/presences', [PresenceController::class, 'index'])->name('admin.presences.index');
 Route::get('/admin/presences/batch', [PresenceController::class, 'createBatch'])->name('admin.presences.batch');
 Route::post('/admin/presences/batch', [PresenceController::class, 'storeBatch'])->name('admin.presences.batch');
+
+// ========== Admin: Domaines ==========
+Route::get('/admin/domaines', [DomainController::class, 'index'])->name('admin.domaines.index');
+Route::get('/admin/domaines/create', [DomainController::class, 'create'])->name('admin.domaines.create');
+Route::post('/admin/domaines', [DomainController::class, 'store'])->name('admin.domaines.store');
+Route::get('/admin/domaines/{domaine}/edit', [DomainController::class, 'edit'])->name('admin.domaines.edit');
+Route::put('/admin/domaines/{domaine}', [DomainController::class, 'update'])->name('admin.domaines.update');
+Route::delete('/admin/domaines/{domaine}', [DomainController::class, 'destroy'])->name('admin.domaines.destroy');

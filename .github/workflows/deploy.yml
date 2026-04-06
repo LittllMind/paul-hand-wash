@@ -1,0 +1,31 @@
+name: Deploy Paolo to Hostinger
+
+on:
+  push:
+    branches: [ production ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: production
+
+      - name: Deploy to Hostinger via SSH
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: 195.35.49.242
+          port: 65002
+          username: u417457839
+          password: NewProduction18@H
+          source: "site/*"
+          target: "domains/la-main-a-la-pate.online/public_html/paolo/"
+          strip_components: 1
+
+      - name: Verify deployment
+        run: |
+          echo "✅ Paolo deployed!"
+          echo "URL: https://paolo.la-main-a-la-pate.online/"
